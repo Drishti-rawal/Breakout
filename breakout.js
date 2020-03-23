@@ -28,7 +28,8 @@ var ball = new Image();
 ball.src = 'ball.jpg';
 var bric = new Image();
 bric.src='brick.jpg';
-
+var bck = new Image();
+bck.src='back.png';
 function initbricks(){
 for(var c=0;c<brickcols;c++)
 {
@@ -113,7 +114,7 @@ function detectCollision(){
 					dy = -dy;
 					b.status=0;
 					score++;
-					if(score == 3)
+					if(score == 2)
 					//if(score == brickcols*brickrows)
 					{
 						if(level==maxLevel)
@@ -131,6 +132,13 @@ function detectCollision(){
 							ballX=canvas.width/2;
 							ballY=canvas.height -20;
 							paddleX = (canvas.width - paddleWidth)/2;
+
+							paused=true;
+							nextLevel();
+							setTimeout(function(){
+									paused=false;
+									draw();
+							}, 3000);
 							
 							
 
@@ -143,6 +151,13 @@ function detectCollision(){
 		}
 }
 
+function nextLevel()
+{
+	ctx.drawImage(bck,0,0,canvas.width,canvas.height);
+	ctx.font="16px Arial";
+	ctx.fillStyle="#0095DD";
+	ctx.fillText("Congratulations! Starting next level",canvas.width/3,canvas.height/2);
+}
 function drawlevel()
 {
 	ctx.font="16px Arial";
@@ -205,6 +220,10 @@ function draw()
 	
 	ballX+=dx;
 	ballY+=dy;
+	if(!paused){
+		requestAnimationFrame(draw);}
+	
+	
 }
 document.addEventListener("mousemove",mouseMoveHandler);
 function mouseMoveHandler(e) {
@@ -213,4 +232,5 @@ function mouseMoveHandler(e) {
 		paddleX = relativeX - paddleWidth/2;
 	}
 }
-setInterval(draw,8);
+//setInterval(draw,15);
+draw();
