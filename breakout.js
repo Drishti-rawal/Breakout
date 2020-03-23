@@ -93,13 +93,9 @@ function drawPaddle()
 function detectCollision(){
 	for (var c = 0; c < brickcols; c++) {
 		for (var r = 0; r < brickrows; r++) {
-			//var b is used to store the brick object in every loop of the collision detection
-			//(b for Brick)
 			var b = bricks[c][r];
 			if(b.status == 1) {
-				//if the x position of the ball is greater than the x position of the brick and less than the x of the brick plus the brick width, which means the ball is between the left and right sides of the brick, which is inside the brick, then we change the direction of the ball.  Similar situation with the y.
 				if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
-					//change the direction of the ball
 					dy = -dy;
 					b.status=0;
 					score++;
