@@ -114,8 +114,8 @@ function detectCollision(){
 					dy = -dy;
 					b.status=0;
 					score++;
-					if(score == 2)
-					//if(score == brickcols*brickrows)
+					//if(score == 2)
+					if(score == brickcols*brickrows)
 					{
 						if(level==maxLevel)
 						{alert("YOU WIN! ");
